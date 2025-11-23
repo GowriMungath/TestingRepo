@@ -146,6 +146,11 @@ class TestContributorActivityAnalysis(unittest.TestCase):
     @patch("contributor_activity_analysis.plt.show")
     @patch("builtins.input", return_value="abc")
     def test_invalid_year_input_causes_crash(self, mock_input, mock_show, mock_dataloader):
+        """
+        BUG: No validation for year input. Non-numeric input causes ValueError.
+        Expected: Should handle gracefully or show error message.
+        Actual: Crashes with ValueError - this test will fail with ValueError.
+        """
         issues = [DummyIssue("alice", "2025-01-01T12:00:00Z")]
         mock_dataloader.return_value.get_issues.return_value = issues
         
@@ -158,6 +163,11 @@ class TestContributorActivityAnalysis(unittest.TestCase):
     @patch("contributor_activity_analysis.plt.show")
     @patch("builtins.input", return_value="")
     def test_case_sensitive_usernames_counted_separately(self, mock_input, mock_show, mock_dataloader):
+        """
+        BUG: Usernames are case-sensitive. "Alice" and "alice" count as different users.
+        Expected: Should normalize to lowercase for counting.
+        Actual: Treats them as separate contributors.
+        """
         issues = [
             DummyIssue("Alice", "2025-01-01T12:00:00Z"),
             DummyIssue("alice", "2025-01-02T12:00:00Z"),
@@ -178,6 +188,11 @@ class TestContributorActivityAnalysis(unittest.TestCase):
     @patch("contributor_activity_analysis.plt.show")
     @patch("builtins.input", side_effect=["-1", "n"])
     def test_negative_year_accepted(self, mock_input, mock_show, mock_dataloader):
+        """
+        BUG: Negative year input is accepted without validation.
+        Expected: Should reject negative years.
+        Actual: Accepts -1, -2024, etc.
+        """
         issues = [DummyIssue("alice", "2025-01-01T12:00:00Z")]
         mock_dataloader.return_value.get_issues.return_value = issues
         
