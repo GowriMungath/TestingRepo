@@ -112,7 +112,7 @@ class TestIssueCreationTrendAnalysis(unittest.TestCase):
     # This test case is expected to fail
     def test_invalid_year_input(self):
         """
-        BUG 1: Non-numeric year input.
+        BUG: Non-numeric year input.
         Currently: int('abcd') raises ValueError and crashes.
 
         Expected (what this test encodes):
@@ -138,7 +138,7 @@ class TestIssueCreationTrendAnalysis(unittest.TestCase):
     # This test case is expected to fail
     def test_no_issues_loaded(self):
         """
-        BUG 2: DataLoader returns no issues.
+        BUG: DataLoader returns no issues.
         Currently: df has no 'created_date', so df['created_date'] raises KeyError.
 
         Expected:
@@ -164,7 +164,7 @@ class TestIssueCreationTrendAnalysis(unittest.TestCase):
     # This test case is expected to fail
     def test_all_invalid_dates(self):
         """
-        BUG 3: All created_date values are invalid and get dropped.
+        BUG: All created_date values are invalid and get dropped.
         Currently: trend is empty and idxmax() raises ValueError.
 
         Expected:
