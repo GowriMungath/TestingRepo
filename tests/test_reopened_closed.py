@@ -103,6 +103,11 @@ class TestReopenedClosedAnalysis(unittest.TestCase):
     @patch("builtins.input", side_effect=["abc", "", "n"])
     @patch("reopened_closed_analysis.DataLoader")
     def test_invalid_date_input_failure(self, mock_loader, mock_input):
+        """
+        BUG: Invalid date input not handled.
+        Expected: Should prompt user again or handle gracefully.
+        Actual: Crashes with DateParseError.
+        """
         from reopened_closed_analysis import ReopenedClosedAnalysis
         mock_loader.return_value.get_issues.return_value = [
             MagicMock(number=1, state="open", created_date="2024-02-01", events=[])
@@ -118,6 +123,11 @@ class TestReopenedClosedAnalysis(unittest.TestCase):
     @patch("builtins.input", side_effect=["", "", "n"])
     @patch("reopened_closed_analysis.DataLoader")
     def test_events_none_failure(self, mock_loader, mock_input):
+        """
+        BUG: If issue.events is None, code crashes when iterating over events.
+        Expected: Should handle NoneType gracefully.
+        Actual: Crashes with TypeError.
+        """
         from reopened_closed_analysis import ReopenedClosedAnalysis
         mock_loader.return_value.get_issues.return_value = [
             MagicMock(number=1, state="closed", created_date="2024-01-01", events=None)
