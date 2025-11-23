@@ -99,6 +99,7 @@ class TestReopenedClosedAnalysis(unittest.TestCase):
         analysis.run()
 
 
+    # This test case is expected to fail
     @patch("builtins.input", side_effect=["abc", "", "n"])
     @patch("reopened_closed_analysis.DataLoader")
     def test_invalid_date_input_failure(self, mock_loader, mock_input):
@@ -113,6 +114,7 @@ class TestReopenedClosedAnalysis(unittest.TestCase):
             self.fail("Expected failure due to invalid date input") 
 
 
+    # This test case is expected to fail
     @patch("builtins.input", side_effect=["", "", "n"])
     @patch("reopened_closed_analysis.DataLoader")
     def test_events_none_failure(self, mock_loader, mock_input):

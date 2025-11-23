@@ -109,7 +109,7 @@ class TestIssueCreationTrendAnalysis(unittest.TestCase):
             mock_savefig.assert_not_called()
             mock_show.assert_not_called()
 
-
+    # This test case is expected to fail
     def test_invalid_year_input(self):
         """
         BUG 1: Non-numeric year input.
@@ -135,6 +135,7 @@ class TestIssueCreationTrendAnalysis(unittest.TestCase):
                     f"but ValueError was raised: {e}"
                 )
 
+    # This test case is expected to fail
     def test_no_issues_loaded(self):
         """
         BUG 2: DataLoader returns no issues.
@@ -160,6 +161,7 @@ class TestIssueCreationTrendAnalysis(unittest.TestCase):
                     f"but KeyError was raised: {e}"
                 )
 
+    # This test case is expected to fail
     def test_all_invalid_dates(self):
         """
         BUG 3: All created_date values are invalid and get dropped.

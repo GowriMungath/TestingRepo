@@ -142,6 +142,7 @@ class TestContributorActivityAnalysis(unittest.TestCase):
         analysis.loader = type("", (), {"get_issues": lambda self: issues})()
         analysis.run()
 
+    # This test case is expected to fail
     @patch("contributor_activity_analysis.DataLoader")
     @patch("contributor_activity_analysis.plt.show")
     @patch("builtins.input", return_value="abc")
@@ -154,6 +155,7 @@ class TestContributorActivityAnalysis(unittest.TestCase):
             analysis.run()
         self.fail("Program should handle invalid year input gracefully, not raise ValueError")
     
+    # This test case is expected to fail
     @patch("contributor_activity_analysis.DataLoader")
     @patch("contributor_activity_analysis.plt.show")
     @patch("builtins.input", return_value="")
@@ -173,7 +175,8 @@ class TestContributorActivityAnalysis(unittest.TestCase):
         
         self.assertEqual(actual_unique, unique_users, 
                         f"Expected {unique_users} unique user, got {actual_unique}")
-        
+    
+    # This test case is expected to fail
     @patch("contributor_activity_analysis.DataLoader")
     @patch("contributor_activity_analysis.plt.show")
     @patch("builtins.input", side_effect=["-1", "n"])
